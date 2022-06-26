@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 router.post('/send', async (req, res) => {
   const { uuid, emailTo, emailFrom, expiresIn } = req.body;
   if(!uuid || !emailTo || !emailFrom) {
-      return res.status(422).send({ error: 'All fields are required except expiry.'});
+      return res.status(422).send({ error: 'All fields are required except expiry.', req: req.body});
   }
   // Get data from db 
   try {
@@ -60,7 +60,7 @@ router.post('/send', async (req, res) => {
     }).then(() => {
       return res.json({success: true});
     }).catch(err => {
-      return res.status(500).json({error: 'Error in email sending.'});
+      return res.status(500).json({error: 'Error in email sending.', msg: err.message});
     });
 } catch(err) {
   return res.status(500).send({ error: 'Something went wrong.'});

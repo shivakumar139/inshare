@@ -1,3 +1,4 @@
+
 const dropZone = document.querySelector(".drop-zone");
 const fileInput = document.querySelector("#fileInput");
 const browseBtn = document.querySelector("#browseBtn");
@@ -15,8 +16,9 @@ const emailForm = document.querySelector("#emailForm");
 
 const toast = document.querySelector(".toast");
 
-const baseURL = "https://inshare5.herokuapp.com";
-// const baseURL = "http://localhost:7000";
+// const baseURL = "https://inshare5.herokuapp.com";
+const baseURL = "http://localhost:7000";
+// const baseURL = process.env.APP_BASE_URL;
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 
@@ -147,7 +149,7 @@ emailForm.addEventListener("submit", (e) => {
     emailTo: emailForm.elements["to-email"].value,
     emailFrom: emailForm.elements["from-email"].value,
   };
-  console.log(formData);
+  console.log("form data", formData);
   fetch(emailURL, {
     method: "POST",
     headers: {
