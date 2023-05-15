@@ -22,7 +22,7 @@ const baseURL = "http://localhost:3000";
 const uploadURL = `${baseURL}/api/files`;
 const emailURL = `${baseURL}/api/files/send`;
 
-const maxAllowedSize = 100 * 1024 * 1024; //100mb
+const maxAllowedSize = 5167873894; //100mb
 
 
 browseBtn.addEventListener("click", () => {
@@ -33,12 +33,13 @@ dropZone.addEventListener("drop", (e) => {
   e.preventDefault();
   //   console.log("dropped", e.dataTransfer.files[0].name);
   const files = e.dataTransfer.files;
+  alert(files[0].size);
   if (files.length === 1) {
     if (files[0].size < maxAllowedSize) {
       fileInput.files = files;
       uploadFile();
     } else {
-      showToast("Max file size is 100MB");
+      showToast("Max file size is 100MB" );
     }
   } else if (files.length > 1) {
     showToast("You can't upload multiple files");
@@ -61,6 +62,7 @@ dropZone.addEventListener("dragleave", (e) => {
 
 // file input change and uploader
 fileInput.addEventListener("change", () => {
+  // alert(fileInput.files[0].size);
   if (fileInput.files[0].size > maxAllowedSize) {
     showToast("Max file size is 100MB");
     fileInput.value = ""; // reset the input
